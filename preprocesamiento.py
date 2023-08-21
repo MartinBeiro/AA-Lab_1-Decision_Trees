@@ -27,10 +27,10 @@ def discretizar(df_data:pd.DataFrame, df_preprod_config:pd.DataFrame):
 
 #Para pruebas
 
-# path_config = 'preprod_config.csv'
-# df_preprod_config = pd.read_csv(path_config, sep=',')
-# path = 'data/data.csv'
-# df_data = pd.read_csv(path, sep=';')     
-# contar_unicos_antes= df_data.nunique()
-# discretizar(df_data, df_preprod_config)
-# contar_unicos_despues= df_data.nunique()
+path_config = 'preprod_config.csv'
+df_preprod_config = pd.read_csv(path_config, sep=',')
+path = 'data/data.csv'
+df_data = pd.read_csv(path, sep=';')     
+contar_unicos_antes= df_data.nunique()
+discretizar(df_data, df_preprod_config)
+contar_unicos_despues= df_data.nunique()

@@ -1,5 +1,8 @@
-columna,algoritmo,min,max,bins
-Previous qualification (grade),bins,0,200,20
-Admission grade,bins,0,200,20
-Curricular units 1st sem (grade),redondeo,0,20,21
-Curricular units 2nd sem (grade),redondeo,0,20,21
+columna,algoritmo,bins
+Previous qualification (grade),bins,20
+Admission grade,bins,20
+Curricular units 1st sem (grade),redondeo,21
+Curricular units 2nd sem (grade),redondeo,21
+Unemployment rate,bins,10
+Inflation rate,bins,10
+GDP,bins,10
