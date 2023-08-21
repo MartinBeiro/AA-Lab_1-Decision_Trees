@@ -11,7 +11,7 @@ from sklearn.preprocessing import KBinsDiscretizer
 from sklearn import tree
 from sklearn.ensemble import RandomForestClassifier
 
-path = 'datos/data.csv'
+path = 'data/data.csv'
 
 df_data = pd.read_csv(path, sep=';')
 
@@ -138,5 +138,7 @@ col1=['Alta', 'Baja', 'Media', 'Media']
 col2=['Graduate', 'Dropout', 'Graduate', 'Dropout']
 col1=np.expand_dims(col1, 0).T
 col2=np.expand_dims(col2, 0).T
-datos= np.concatenate((col1, col2))
-df_prueba = pd.DataFrame(data=[['Alta', 'Baja', 'Media', 'Media'],['Graduate', 'Dropout', 'Graduate', 'Dropout']], columns=['Marital Status', 'Target'])
+datos= np.concatenate((col1, col2), axis=1)
+df_prueba = pd.DataFrame(data=datos, columns=['Marital status', 'Target'])
+
+ganancia_prueba=ganancia(df_prueba, 'Marital status', 'Target', 1 )
