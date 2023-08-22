@@ -8,7 +8,8 @@ Created on Fri Aug 18 13:18:18 2023
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import KBinsDiscretizer 
-from sklearn import tree
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.tree import export_text
 from sklearn.ensemble import RandomForestClassifier
 
 path = 'data/data.csv'

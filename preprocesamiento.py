@@ -5,8 +5,8 @@ import numpy as np
 def discretizar(df_data:pd.DataFrame, df_preprod_config:pd.DataFrame):
     
     print()
-    print('-------------------------')
-    print('---Bordes de los bines---')
+    print('-----------------------------------------------------------------------')
+    print('--------------------------Bordes de los bines--------------------------')
     
     for idx, col in enumerate(df_preprod_config['columna']):
         if df_preprod_config['algoritmo'][idx]=='redondeo':
@@ -21,7 +21,7 @@ def discretizar(df_data:pd.DataFrame, df_preprod_config:pd.DataFrame):
             print(enc.bin_edges_[0])
     
     print()
-    print('-------------------------')
+    print('-----------------------------------------------------------------------')
     print()
 
 
