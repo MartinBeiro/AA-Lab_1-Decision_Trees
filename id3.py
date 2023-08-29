@@ -25,8 +25,8 @@ def id3(df,target_column, min_samples_split, min_split_gain):
             #most_common_value= df[target_column].unique()
 
 
-    print("Valor mas comun: ", most_common_value)
-    print("Numero de columnas: ", len_columns)
+    #print("Valor mas comun: ", most_common_value)
+    #print("Numero de columnas: ", len_columns)
     if len_columns == 1:
         return most_common_value
     
@@ -34,7 +34,7 @@ def id3(df,target_column, min_samples_split, min_split_gain):
     #print("columnas: ", df.columns)
 
     ## si todos los ejemplos tienen el mismo valor de target, poner ese valor
-    print("Numero de valores unicos: ", df[target_column].nunique())
+    #print("Numero de valores unicos: ", df[target_column].nunique())
     if df[target_column].nunique() == 1:
         return most_common_value
     
@@ -53,7 +53,7 @@ def id3(df,target_column, min_samples_split, min_split_gain):
     
 
     attribute_values=df[best_attribute].unique()
-    print("Atributo: ", best_attribute,attribute_values)
+    #print("Atributo: ", best_attribute,attribute_values)
     
     root[best_attribute]={}
 
@@ -122,6 +122,44 @@ def test_decision_tree():
 
     print(tree)
 
+def predict(tree, df):
+    results=[]
+    for index,row in df.iterrows():
+        ##iterative predictio 
+        root=list(tree.keys())[0]
+        sub_tree=tree
+        i=0
+        while i in range(len(row)):
+
+
+            valor = row[root]
+            sub_tree=sub_tree[root][valor]
+
+            if not isinstance(sub_tree, dict):
+                results.append(sub_tree)
+                break 
+            root=list(sub_tree.keys())[0]
+           
+            
+            i+=1
+    return results       
+                    
+                
+
+
+
+            
 
 if __name__ == '__main__':
     test_decision_tree()
+
+    df_test=   df = pd.DataFrame({
+        'Outlook': ['Sunny', 'Sunny', 'Overcast', 'Rain', 'Rain', 'Rain', 'Overcast', 'Sunny', 'Sunny', 'Rain', 'Sunny', 'Overcast', 'Overcast', 'Rain'],
+        'Temperature': ['Hot', 'Hot', 'Hot', 'Mild', 'Cool', 'Cool', 'Cool', 'Mild', 'Cool', 'Mild', 'Mild', 'Mild', 'Hot', 'Mild'],
+        'Humidity': ['High', 'High', 'High', 'High', 'Normal', 'Normal', 'Normal', 'High', 'Normal', 'Normal', 'Normal', 'High', 'Normal', 'High'],
+        'Windy': [False, True, False, False, False, True, True, False, False, False, True, True, False, True],
+        'Play': [False, False, True, True, True, False, True, False, True, True, True, True, True, False]
+
+    })
+    tree=decision_tree(df_test, 'Play', min_samples_split=2, min_split_gain=0)
+    predict(tree, df_test)

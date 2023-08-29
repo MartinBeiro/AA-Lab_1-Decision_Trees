@@ -49,8 +49,9 @@ def separar_train_test(df_data, test_size=0.3, random_state=45):
 ##ID3
 def arbol_ID3(df_train, df_test, min_samples_split = 40, min_split_gain = 0.3):
     arbol_ID3=id3.id3(df_train,'Target', min_samples_split, min_split_gain)
-    #predict_ID3 = id3.predict(arbol_ID3, df_test.loc[:, df_test.columns != 'Target'])
-    predict_ID3 = df_test['Target']
+    predict_ID3 = id3.predict(arbol_ID3, df_test.loc[:, df_test.columns != 'Target'])
+    
+    #predict_ID3 = df_test['Target']
     
     print()
     print('-----------------------------------------------------')
