@@ -1,6 +1,7 @@
 columna,algoritmo,bins
 Previous qualification (grade),bins,20
 Admission grade,bins,20
+Age at enrollment,bins, 10
 Curricular units 1st sem (grade),redondeo,0
 Curricular units 2nd sem (grade),redondeo,0
 Unemployment rate,bins,10

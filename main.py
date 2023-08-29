@@ -57,7 +57,8 @@ def arbol_ID3(df_train, df_test, min_samples_split = 40, min_split_gain = 0.3):
     print('-----------------------------------------------------')
     print('ID3:')
     
-    ConfusionMatrixDisplay.from_predictions(df_test['Target'], predict_ID3 )
+    disp = ConfusionMatrixDisplay.from_predictions(df_test['Target'], predict_ID3 )
+    disp.plot()
     plt.show()    
     print()
     print(classification_report(df_test['Target'], predict_ID3, target_names=["Dropout","Graduate"]))
@@ -127,8 +128,7 @@ def evaluar_hiperparametros(df_train, df_test, min_samples_split_array, min_spli
             
             hojas_mss.append(contar_estructura(arbol_ID3)[1])
             
-            #predict = id3.predict(arbol_ID3, df_test.loc[:, df_test.columns != 'Target'])
-            predict = df_test['Target']
+            predict = id3.predict(arbol_ID3, df_test.loc[:, df_test.columns != 'Target'])
             result = classification_report(df_test['Target'], predict, target_names=["Dropout","Graduate"],output_dict=True)
             exact_mss.append(result['accuracy'])
         
@@ -168,12 +168,12 @@ if __name__ == '__main__':
     min_samples_split_array = np.arange(40, 200,100)
     min_split_gain_array = np.arange(0.03, 0.3, 0.1)
     
-    evaluar_hiperparametros(df_train, df_test, min_samples_split_array, min_split_gain_array)
+    #evaluar_hiperparametros(df_train, df_test, min_samples_split_array, min_split_gain_array)
     
-    #min_samples_split = 40
-    #min_split_gain = 0.3
-    # arbol_ID3(df_train, df_test, min_samples_split, min_split_gain)
-    # arbol_DTC(df_train, df_test, min_samples_split)
-    # arbol_RTF(df_train, df_test, min_samples_split)
+    min_samples_split = 140
+    min_split_gain = 0.13
+    arbol_ID3(df_train, df_test, min_samples_split, min_split_gain)
+    arbol_DTC(df_train, df_test, min_samples_split)
+    arbol_RTF(df_train, df_test, min_samples_split)
     
 

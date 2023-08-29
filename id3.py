@@ -55,7 +55,7 @@ def id3(df,target_column, min_samples_split, min_split_gain):
     attribute_values=df[best_attribute].unique()
     #print("Atributo: ", best_attribute,attribute_values)
     
-    root[best_attribute]={}
+    root[best_attribute]={'__default':most_common_value}
 
     for attribute in attribute_values:
 
@@ -124,6 +124,7 @@ def test_decision_tree():
 
 def predict(tree, df):
     results=[]
+    num_defaulted=0
     for index,row in df.iterrows():
         ##iterative predictio 
         root=list(tree.keys())[0]
@@ -133,7 +134,14 @@ def predict(tree, df):
 
 
             valor = row[root]
-            sub_tree=sub_tree[root][valor]
+            try:
+                sub_tree=sub_tree[root][valor]
+            except:
+                print("No se encontro el valor: ", valor, " en el arbol")
+                print("Arbol: ", sub_tree)	
+                results.append(sub_tree[root]['__default'])
+                num_defaulted+=1
+                break
 
             if not isinstance(sub_tree, dict):
                 results.append(sub_tree)
@@ -142,6 +150,8 @@ def predict(tree, df):
            
             
             i+=1
+    num_rows=len(df)
+    print(num_defaulted, " de ", num_rows, " filas no se pudieron predecir")
     return results       
                     
                 
@@ -162,4 +172,5 @@ if __name__ == '__main__':
 
     })
     tree=decision_tree(df_test, 'Play', min_samples_split=2, min_split_gain=0)
-    predict(tree, df_test)
+    results=predict(tree, df_test)
+    print(results)
