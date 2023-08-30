@@ -165,13 +165,13 @@ if __name__ == '__main__':
     df_train, df_test = separar_train_test(df_data, test_size=0.3, random_state=45)
     
     
-    min_samples_split_array = np.arange(40, 200,100)
-    min_split_gain_array = np.arange(0.03, 0.3, 0.1)
+    min_samples_split_array = np.arange(5, 150,15)
+    min_split_gain_array = np.arange(0.03, 0.3, 0.03)
     
     #evaluar_hiperparametros(df_train, df_test, min_samples_split_array, min_split_gain_array)
     
-    min_samples_split = 140
-    min_split_gain = 0.13
+    min_samples_split = 125
+    min_split_gain = 0.09
     arbol_ID3(df_train, df_test, min_samples_split, min_split_gain)
     arbol_DTC(df_train, df_test, min_samples_split)
     arbol_RTF(df_train, df_test, min_samples_split)
