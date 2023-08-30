@@ -35,7 +35,9 @@ def preprocesar_datos(df_data, df_preprod_config):
 ##Se separa es test y train
 def separar_train_test(df_data, test_size=0.3, random_state=45):
     df_train, df_test = train_test_split(df_data, test_size=test_size, random_state=random_state)
-    return df_train, df_test
+    df_train, df_validation = train_test_split(df_train, test_size=0.15, random_state=random_state)
+
+    return df_train, df_test,df_validation
 
 #%%
 ###Árboles de decisión###
@@ -162,13 +164,13 @@ if __name__ == '__main__':
     df_data=cargar_datos()
     df_preprod_config = cargar_configuracion()
     preprocesar_datos(df_data, df_preprod_config)
-    df_train, df_test = separar_train_test(df_data, test_size=0.3, random_state=45)
+    df_train, df_test, df_validation = separar_train_test(df_data, test_size=0.3, random_state=45)
     
     
     min_samples_split_array = np.arange(5, 150,15)
     min_split_gain_array = np.arange(0.03, 0.3, 0.03)
     
-    #evaluar_hiperparametros(df_train, df_test, min_samples_split_array, min_split_gain_array)
+    #evaluar_hiperparametros(df_train, df_validation, min_samples_split_array, min_split_gain_array)
     
     min_samples_split = 125
     min_split_gain = 0.09
